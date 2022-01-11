@@ -1,21 +1,45 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from "react";
+import Countries from "./components/countries/Countries";
+import Header from "./components/header/Header";
 
 export default class App extends Component {
-  constructor(){
+  constructor() {
     super();
 
     this.state = {
-      allCountries: []
-    }
+      allCountries: [],
+    };
   }
 
-  async componentDidMount(){
-    const res = await fetch('https://restcountries.com/v3.1/all', {mode: 'no-cors'});
+  async componentDidMount() {
+    const res = await fetch("https://restcountries.com/v2/all");
     const json = await res.json();
-    // console.log(json);
+
+    const allCountries = json.map(({ numericCode, name, flag, population }) => {
+      return {
+        id: numericCode,
+        name,
+        flag,
+        population,
+      };
+    });
+
+    this.setState({
+      allCountries,
+    });
   }
 
   render() {
-    return <p>Teste</p>;
+    const { allCountries } = this.state;
+
+    return (
+      <>
+        <h1>React Countries</h1>
+
+        <Header />
+
+        <Countries countries={allCountries} />
+      </>
+    );
   }
 }
