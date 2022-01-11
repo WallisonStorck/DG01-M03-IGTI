@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Countries from "./components/countries/Countries";
 import Header from "./components/header/Header";
 
@@ -8,9 +8,30 @@ export default class App extends Component {
 
     this.state = {
       allCountries: [],
+      filteredCountries: [],
+      filter: "",
+      totalPopulation: 0,
     };
   }
 
+  /**
+   * Função que vai calcular e retorna a população total de países conforme
+   * parâmetro, seja todos ou somente os filtrados...
+   */
+  countTotalPopulationFrom(countries) {
+    const totalPopulation = countries.reduce((accumulator, current) => {
+      return accumulator + current.population;
+    }, 0);
+
+    return totalPopulation;
+  }
+
+  /**
+   * Função para os primeiros procedimentos após montado o DOM, faz o fetch da API
+   * filtra somente os dados necessários, conta a população e seta no estado...
+   * Obs.: "filteredName" existe somente para usar ao filtrar os países, por
+   * questões de performance.
+   */
   async componentDidMount() {
     const res = await fetch("https://restcountries.com/v2/all");
     const json = await res.json();
@@ -19,26 +40,65 @@ export default class App extends Component {
       return {
         id: numericCode,
         name,
+        filteredName: name.toLowerCase(),
         flag,
         population,
       };
     });
 
+    const totalPopulation = this.countTotalPopulationFrom(allCountries);
+    /**
+     * Inicialmente "filteredCountries" começa com todos os países
+     */
     this.setState({
       allCountries,
+      filteredCountries: allCountries,
+      totalPopulation,
     });
   }
 
+  /**
+   * Função que é chamada após cada interação do usuário no input, ela manda o
+   * texto para o estado "filter", que é lançado no input através da props no
+   * componente; filtra os países conforme texto do input coloca em
+   * "filteredCountries", conta a população e também manda para o estado.
+   */
+  handleChangeFilter = (newText) => {
+    this.setState({
+      filter: newText,
+    });
+
+    const nameCountryLowerCase = newText.toLowerCase();
+
+    const filteredCountries = this.state.allCountries.filter((country) => {
+      return country.filteredName.includes(nameCountryLowerCase);
+    });
+
+    const totalPopulation = this.countTotalPopulationFrom(filteredCountries);
+
+    this.setState({
+      filteredCountries,
+      totalPopulation,
+    });
+  };
+
   render() {
-    const { allCountries } = this.state;
+    const { filteredCountries, filter, totalPopulation } = this.state;
 
     return (
       <>
         <h1>React Countries</h1>
 
-        <Header />
+        {/* Passado por props o "filter", que é o valor atual do input, e outras
+        que o próprio nome diz a respeito */}
+        <Header
+          filter={filter}
+          countryCount={filteredCountries.length}
+          populationCount={totalPopulation}
+          onChangeFilter={this.handleChangeFilter}
+        />
 
-        <Countries countries={allCountries} />
+        <Countries countries={filteredCountries} />
       </>
     );
   }
