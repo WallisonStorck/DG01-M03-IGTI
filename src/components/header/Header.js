@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { formatNumber } from "../helpers/formatHelper";
+import css from "./header.module.css";
 
 export default class Header extends Component {
   handleChangeInput = (event) => {
@@ -15,11 +17,21 @@ export default class Header extends Component {
      * função que encapsula o método "onChangeFilter" recebido via props.
      */
     return (
-      <>
-        <input type="text" value={filter} onChange={this.handleChangeInput} />
-        <span>Países: {countryCount}|</span>
-        <span>População: {populationCount}|</span>
-      </>
+      <div className={`${css.flexRow} ${css.border}`}>
+        <input
+          className={css.inputCountries}
+          type="text"
+          value={filter}
+          placeholder="Filter"
+          onChange={this.handleChangeInput}
+        />
+        <span>
+          Countries: <strong>{countryCount}</strong> |
+        </span>
+        <span>
+          Population: <strong>{formatNumber(populationCount)}</strong> |
+        </span>
+      </div>
     );
   }
 }

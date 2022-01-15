@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Countries from "./components/countries/Countries";
 import Header from "./components/header/Header";
+import css from "./app.module.css";
 
 export default class App extends Component {
   constructor() {
@@ -86,7 +87,7 @@ export default class App extends Component {
     const { filteredCountries, filter, totalPopulation } = this.state;
 
     return (
-      <>
+      <div className={css.container}>
         <h1>React Countries</h1>
 
         {/* Passado por props o "filter", que é o valor atual do input, e outras
@@ -99,7 +100,7 @@ export default class App extends Component {
         />
 
         <Countries countries={filteredCountries} />
-      </>
+      </div>
     );
   }
 }
