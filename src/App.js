@@ -88,7 +88,7 @@ export default class App extends Component {
 
     return (
       <div className={css.container}>
-        <h1>React Countries</h1>
+        <h1 style={{ textAlign: "center" }}>React Countries</h1>
 
         {/* Passado por props o "filter", que é o valor atual do input, e outras
         que o próprio nome diz a respeito */}

@@ -7,9 +7,8 @@ export default class Country extends Component {
 
     return (
       <div className={css.country}>
-        <p>
-          {country.id} - {country.name}
-        </p>
+        <img className={css.flagCountry} src={country.flag} alt="Flag" />
+        <span className={css.nameCountry}>{country.name}</span>
       </div>
     );
   }
