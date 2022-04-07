@@ -14,7 +14,7 @@
 <br>
 
 <p align="center">
-  <img alt="React Countries" src="./reactcountries.png">
+  <img alt="React Countries" src="./reactCountries.png">
 </p>
 
 <br>
