@@ -9,7 +9,7 @@
 
 <br>
 
-## <p align="center"><b>DG01-M03-IGTI</b></p>
+## <p align="center"><b>DG02-M03-IGTI</b></p>
 
 <br>
 
@@ -21,7 +21,7 @@
 
 ## 💻 Projeto
 
-O Desafio Guiado 01 - Módulo 3 - Bootcamp FullStack IGTI (DG02-M03-IGTI) é um desafio onde é construído um mini sistema de consulta de países... a aplicação faz o consumo da API Rest Countries (https://restcountries.com/v2/all) e lista os países onde é possível consultar por expressão regular.
+O Desafio Guiado 02 - Módulo 3 - Bootcamp FullStack IGTI (DG02-M03-IGTI) é um desafio onde é construído um mini sistema de consulta de países... a aplicação faz o consumo da API Rest Countries (https://restcountries.com/v2/all) e lista os países onde é possível consultar por expressão regular.
 
 Para iniciar a aplicação:
 
