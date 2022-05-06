@@ -25,10 +25,11 @@ export default function Header(props) {
         onChange={handleChangeInput}
       />
       <span>
-        Countries: <strong>{countryCount}</strong> |
+        Countries: <strong>{countryCount}</strong>
       </span>
+      <span>|</span>
       <span>
-        Population: <strong>{formatNumber(populationCount)}</strong> |
+        Population: <strong>{formatNumber(populationCount)}</strong>
       </span>
     </div>
   );
